@@ -27,7 +27,7 @@ function WalletIntegration() {
 }
 
 function FAQ() {
-  return <div>FAQ</div>;
+  return <div>FAQ.</div>;
 }
 
 export default function LandingPage() {
