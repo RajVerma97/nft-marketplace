@@ -1,33 +1,65 @@
 'use client';
 
 export function HeroSection() {
-  return <h1>Hero section</h1>;
+  return (
+    <>
+      <div>Hero section</div>
+    </>
+  );
 }
 
 function NftShowcase() {
-  return <div>Nft showcase</div>;
+  return (
+    <>
+      <div>Hero section</div>
+    </>
+  );
 }
 
 function CallToAction() {
-  return <div>Call to action</div>;
+  return (
+    <>
+      <div>Call to action</div>
+    </>
+  );
 }
 function TrendingCollections() {
-  return <div>Trending collections</div>;
+  return (
+    <>
+      <div>Trending collections</div>
+    </>
+  );
 }
 function FeaturedArtists() {
-  return <div>Featured artists</div>;
+  return (
+    <>
+      <div>Featured artists</div>
+    </>
+  );
 }
 
 function TestimonailAndReviews() {
-  return <div>Testimonail and reviews</div>;
+  return (
+    <>
+      <div>Testimonail and reviews</div>
+    </>
+  );
 }
 
 function WalletIntegration() {
-  return <div>Wallet integration</div>;
+  return (
+    <>
+      <div>Wallet integration</div>
+    </>
+  );
 }
 
 function FAQ() {
-  return <div>FAQ.</div>;
+  return (
+    <>
+      <div>FAQ.</div>
+    </>
+  );
 }
 
 export default function LandingPage() {
