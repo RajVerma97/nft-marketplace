@@ -1,20 +1,7 @@
 'use client';
 
-export function HeroSection() {
-  return (
-    <>
-      <div>Hero section</div>
-    </>
-  );
-}
-
-function NftShowcase() {
-  return (
-    <>
-      <div>Hero section</div>
-    </>
-  );
-}
+import HeroSection from '../../components/HeroSection';
+import NftShowcase from '../../components/NFTShowcase';
 
 function CallToAction() {
   return (
@@ -64,7 +51,7 @@ function FAQ() {
 
 export default function LandingPage() {
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-10 p-12">
       <HeroSection />
       <NftShowcase />
       <CallToAction />
