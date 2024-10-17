@@ -2,6 +2,7 @@
 
 import HeroSection from '../../components/HeroSection';
 import NftShowcase from '../../components/NFTShowcase';
+import TestimonialsAndReviews from '../../components/TestimonialsAndReviews';
 
 function CallToAction() {
   return (
@@ -25,14 +26,6 @@ function FeaturedArtists() {
   );
 }
 
-function TestimonailAndReviews() {
-  return (
-    <>
-      <div>Testimonail and reviews</div>
-    </>
-  );
-}
-
 function WalletIntegration() {
   return (
     <>
@@ -51,15 +44,15 @@ function FAQ() {
 
 export default function LandingPage() {
   return (
-    <div className="flex flex-col gap-10 p-12">
+    <div className="flex flex-col gap-10 px-14">
       <HeroSection />
       <NftShowcase />
-      <CallToAction />
-      <TrendingCollections />
-      <FeaturedArtists />
-      <TestimonailAndReviews />
-      <WalletIntegration />
-      <FAQ />
+      {/* <CallToAction /> */}
+      {/* <TrendingCollections /> */}
+      {/* <FeaturedArtists /> */}
+      <TestimonialsAndReviews />
+      {/* <WalletIntegration /> */}
+      {/* <FAQ /> */}
     </div>
   );
 }
