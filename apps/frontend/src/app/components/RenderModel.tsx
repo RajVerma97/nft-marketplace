@@ -7,15 +7,17 @@ interface RenderModelProps {
   modelPath: string;
 }
 
-export default function RenderModel({ modelPath }: RenderModelProps) {
+export default function RenderDinoModel({ modelPath }: RenderModelProps) {
   const { scene } = useGLTF(modelPath);
   const ref = useRef<THREE.Group | null>(null);
 
   // Define colors for different parts
-  const bodyColor = '#ff1493';
-  const eyeColor = '#ffea00';
-  const nailsColor = '#ffea00';
-  const teethColor = '#ffea00';
+  // Define colors for different parts
+  // Define colors for different parts
+  const bodyColor = '#39ff14'; // Neon Green
+  const eyeColor = '#ff3f81'; // Neon Pink
+  const nailsColor = '#e1ff00'; // Neon Yellow
+  const teethColor = '#ff3f81'; // Neon Pink
 
   useFrame(() => {
     if (ref.current) {
@@ -80,6 +82,7 @@ export default function RenderModel({ modelPath }: RenderModelProps) {
       object={scene}
       rotation={[0, -Math.PI / 6, 0]} // Rotate slightly
       scale={[0.8, 0.8, 0.8]} // Adjust scale as needed
+      position={[0, 0, 0]}
     />
   );
 }

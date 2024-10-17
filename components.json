@@ -1,0 +1,14 @@
+{
+  "components": [
+    {
+      "name": "Button",
+      "description": "A customizable button component.",
+      "path": "./src/components/Button.tsx"
+    },
+    {
+      "name": "Card",
+      "description": "A card component for displaying content.",
+      "path": "./src/components/Card.tsx"
+    }
+  ]
+}
