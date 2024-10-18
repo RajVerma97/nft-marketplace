@@ -1,82 +1,137 @@
-import { OrbitControls, Stars } from '@react-three/drei';
+import { Stars } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
-import RenderModel from './RenderModel';
 import { Button } from '@my-org/ui-components'; // Adjust the import based on your paths
 import * as THREE from 'three';
-import { useRef, useState } from 'react';
-import RenderDinoModel from './RenderModel';
-import RenderDragonModel from './RenderDragonModel';
+import { useMemo, useRef, useState } from 'react';
+import { useThree } from '@react-three/fiber';
+import { Float, Sphere } from '@react-three/drei';
+import { EffectComposer, Bloom, Glitch } from '@react-three/postprocessing';
+import { useSpring, a } from '@react-spring/three';
 
-function PulsatingCube() {
-  const ref = useRef<THREE.Mesh>(null);
-  const [hovered, setHovered] = useState(false);
+function InteractiveScene() {
+  const { mouse } = useThree();
+  const [isHovered, setIsHovered] = useState(false);
 
-  useFrame(({ clock }) => {
-    if (ref.current) {
-      const elapsed = clock.getElapsedTime();
-
-      ref.current.rotation.x += 0.02; // Rotate faster
-      ref.current.rotation.y += 0.02;
-    }
-  });
-
-  const color = '#00FFFF';
-  const emissiveColor = '#00CED1';
+  const crystals = useMemo(
+    () => [
+      new THREE.IcosahedronGeometry(2, 0),
+      new THREE.DodecahedronGeometry(1.5, 0),
+      new THREE.TetrahedronGeometry(1, 0),
+    ],
+    []
+  );
 
   return (
-    <mesh
-      ref={ref}
-      position={[0, 0, 0]}
-      onPointerOver={() => setHovered(true)} // Change color on hover
-      onPointerOut={() => setHovered(false)}
-    >
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial
-        color={color} // Base color
-        emissive={emissiveColor} // Initial emissive color
-        emissiveIntensity={1} // Initial emissive intensity
-      />
-    </mesh>
+    <group>
+      <Float
+        speed={isHovered ? 6 : 2}
+        rotationIntensity={1.5}
+        floatIntensity={3}
+      >
+        {crystals.map((geometry, index) => (
+          <InteractiveCrystal
+            key={index}
+            geometry={geometry}
+            mouse={mouse}
+            onHoverChange={setIsHovered}
+          />
+        ))}
+      </Float>
+      <InteractiveEnergyCore isHovered={isHovered} />
+    </group>
   );
 }
 
-function FloatingShapes() {
-  useFrame(({ clock }) => {
-    const time = clock.getElapsedTime();
-    // Rotate and scale shapes over time for a dynamic effect
-    // You can create multiple shapes and apply transformations as desired
+function InteractiveCrystal({ geometry, mouse, onHoverChange }) {
+  const crystalRef = useRef();
+  const [isHovered, setHovered] = useState(false);
+
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime();
+    crystalRef.current.rotation.y = t * 0.5 + mouse.x * Math.PI;
+    crystalRef.current.rotation.x = t * 0.3 + mouse.y * Math.PI;
+
+    const emissiveColor = crystalRef.current.material.emissive;
+    emissiveColor.setHSL(0.5 + 0.5 * Math.sin(t), 0.9, isHovered ? 0.7 : 0.5);
+  });
+
+  const { scale } = useSpring({
+    scale: isHovered ? 1.2 : 1,
+    config: { mass: 5, tension: 400, friction: 50 },
   });
 
   return (
-    <>
-      {/* Example of a floating sphere */}
-      <mesh position={[0, 0, -5]}>
-        <sphereGeometry args={[1, 32, 32]} />
-        <meshStandardMaterial color="#FF7F50" />
-      </mesh>
-      {/* Additional shapes can be added here */}
-    </>
-  );
-}
-
-function Background() {
-  return (
-    <Canvas
-      camera={{ position: [50, 50, 50], fov: 35 }}
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: -1,
+    <a.mesh
+      ref={crystalRef}
+      geometry={geometry}
+      scale={scale}
+      onPointerOver={() => {
+        setHovered(true);
+        onHoverChange(true);
+      }}
+      onPointerOut={() => {
+        setHovered(false);
+        onHoverChange(false);
       }}
     >
-      <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} />
-      <RenderDragonModel modelPath={'/dragon-model/dragon.glb'} />
-      <OrbitControls enablePan={false} enableZoom={false} />
-    </Canvas>
+      <meshStandardMaterial
+        color={[0.2, 0.9, 1]}
+        metalness={0.6}
+        roughness={0.1}
+        emissive={new THREE.Color(0.1, 0.5, 0.7)}
+        emissiveIntensity={1}
+      />
+    </a.mesh>
+  );
+}
+
+function InteractiveEnergyCore({ isHovered }) {
+  const coreRef = useRef();
+
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime();
+    const scale = 1 + Math.sin(t * 2) * 0.1;
+    coreRef.current.scale.set(scale, scale, scale);
+    coreRef.current.rotation.y = t * 0.5;
+  });
+
+  return (
+    <group ref={coreRef}>
+      <Sphere args={[1, 32, 32]}>
+        <meshBasicMaterial
+          color={isHovered ? 'hotpink' : [5, 0.8, 2]}
+          toneMapped={false}
+        />
+      </Sphere>
+      <EnergyRays isHovered={isHovered} />
+    </group>
+  );
+}
+
+function EnergyRays({ isHovered }) {
+  const rayRef = useRef();
+
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime();
+    rayRef.current.rotation.y = t * 0.3;
+  });
+
+  const rayGeometry = useMemo(() => new THREE.ConeGeometry(0.1, 5, 8), []);
+
+  return (
+    <group ref={rayRef}>
+      {[...Array(8)].map((_, index) => (
+        <mesh
+          key={index}
+          geometry={rayGeometry}
+          position={[Math.sin(index) * 2, Math.cos(index) * 2, 0]}
+          rotation={[Math.PI / 2, index * 0.2, index * 0.4]}
+          scale={isHovered ? [1.5, 1.5, 1.5] : [1, 1, 1]}
+        >
+          <meshBasicMaterial color={[0.5, 1, 0.8]} toneMapped={false} />
+        </mesh>
+      ))}
+    </group>
   );
 }
 
@@ -84,20 +139,23 @@ export default function HeroSection() {
   return (
     <div className="flex flex-col md:flex-row w-full h-[75vh] p-8 bg-gradient-to-r  border border-gray-700 rounded-lg shadow-2xl mt-8">
       {/* 3D Model Section */}
-      <Background />
+
       <div className="w-full md:w-1/2 order-2 md:order-1 flex justify-center items-center  border-white overflow-hidden">
         <div className="relative w-full h-full flex justify-center items-center">
-          <Canvas
-            camera={{ position: [40, 30, 50], fov: 15 }} // Adjusted camera position for better view
-            className="flex justify-center items-center"
-          >
-            <ambientLight intensity={0.6} />
-            <directionalLight position={[10, 10, 5]} intensity={1} />
-            <pointLight position={[5, 5, 5]} intensity={1} />
-            {/* <RenderDragonModel modelPath={'/dragon-model/dragon.gltf'} /> */}
-
-            <RenderDinoModel modelPath={'/dino-model/dino.glb'} />
-            <OrbitControls enablePan={false} enableZoom={false} />
+          <Canvas camera={{ position: [0, 0, 15], fov: 40 }}>
+            <color attach="background" args={['black']} />
+            <ambientLight intensity={0.2} />
+            <InteractiveScene />
+            <Stars saturation={0} count={600} fade speed={0.5} />
+            <EffectComposer>
+              <Bloom
+                mipmapBlur
+                intensity={1.2}
+                luminanceThreshold={0.4}
+                radius={0.8}
+              />
+              <Glitch delay={[2.5, 5]} />
+            </EffectComposer>
           </Canvas>
         </div>
       </div>

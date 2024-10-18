@@ -4,8 +4,8 @@ import React from 'react';
 
 export default function Header() {
   return (
-    <header className="px-10 py-6  flex items-center justify-between  ">
-      <h4 className=" text-4xl  text-white ">Logo</h4>
+    <header className="px-10 py-6  flex items-center justify-between z-10 ">
+      <h4 className=" text-4xl  text-white ">NFT</h4>
 
       <nav className="flex gap-4">
         <Button asChild className="hover:text-blue-500">

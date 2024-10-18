@@ -107,7 +107,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="p-12 bg-white text-black">
+    <footer className="p-12 bg-white text-black mt-[30rem]">
       <div className="flex justify-between">
         {Object.entries(links).map(([key, value]) => (
           <div key={key}>
