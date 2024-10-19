@@ -4,34 +4,68 @@ import {
   useAnimations,
   useGLTF,
 } from '@react-three/drei';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { EffectComposer, TiltShift2 } from '@react-three/postprocessing';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 
-// Load the GLTF model
+const RenderWalletIcons = () => {
+  const wallets = [
+    {
+      name: 'Metamask',
+      image: '/metamask.svg',
+    },
+    {
+      name: 'Coinbase Wallet',
+      image: '/coinbase.svg',
+    },
+    {
+      name: 'Trust Wallet',
+      image: '/trust-wallet.svg',
+    },
+  ];
+  return (
+    <div className="w-full flex justify-between ">
+      {wallets.map((wallet, index) => (
+        <div
+          key={index}
+          className="flex justify-center items-center p-6 bg-white rounded-full w-20 h-20 cursor-pointer"
+        >
+          <Image
+            src={wallet.image}
+            width={200}
+            height={200}
+            alt="Metamask"
+            className=" object-cover w-full h-full"
+          />
+        </div>
+      ))}
+    </div>
+  );
+};
+
 function Model(props) {
   const { nodes, materials, animations } = useGLTF('/jump-transformed.glb');
   const { ref, actions } = useAnimations(animations);
   const isInView = useRef(false);
-  const scrollY = useRef(0); // Store the global scroll position
+  const scrollY = useRef(0);
 
   useEffect(() => {
     actions.jump.reset().play();
-    actions.jump.paused = true; // Start paused
+    actions.jump.paused = true;
   }, [actions]);
 
   useEffect(() => {
     const handleScroll = () => {
-      scrollY.current = window.scrollY; // Update global scroll position
+      scrollY.current = window.scrollY;
       const scrollPercentage =
         scrollY.current / (document.body.scrollHeight - window.innerHeight); // Calculate scroll percentage
 
       if (scrollPercentage > 0.2 && !isInView.current) {
-        actions.jump.paused = false; // Play animation
+        actions.jump.paused = false;
         isInView.current = true;
       } else if (scrollPercentage <= 0.2 && isInView.current) {
-        actions.jump.paused = true; // Pause animation
+        actions.jump.paused = true;
         isInView.current = false;
       }
 
@@ -64,40 +98,22 @@ function Model(props) {
 
 export default function WalletIntegration() {
   return (
-    <div className="min-h-screen flex border-2 border-white">
-      <div className="flex justify-center items-center w-1/2 relative p-12 rounded-lg bg-black-500">
-        <div>
+    <div className=" flex w-full   h-[90vh]">
+      <div className="flex justify-center items-center w-1/2    border-2">
+        <div className="p-12">
           <h1 className="text-6xl font-bold text-white text-nowrap">
             Wallet Integration
           </h1>
-          <p className="mt-4 text-lg text-gray-200">
+          <p className="mt-4  text-gray-200 text-xl">
             Seamlessly connect your digital wallet to our NFT Marketplace for a
-            smooth and secure trading experience. Our platform supports various
-            wallets, enabling you to easily buy, sell, and manage your NFTs.
+            smooth and secure trading experience.
           </p>
-          <div className="mt-6 flex space-x-4 justify-between">
-            <Image
-              src={'/metamask.svg'}
-              width={50}
-              height={50}
-              alt="Metamask"
-            />
-            <Image
-              src={'/coinbase.svg'}
-              width={50}
-              height={50}
-              alt="Coinbase Wallet"
-            />
-            <Image
-              src={'/trust-wallet.svg'}
-              width={100}
-              height={100}
-              alt="Trust Wallet"
-            />
+          <div className="mt-8 flex space-x-4 justify-between ">
+            <RenderWalletIcons />
           </div>
         </div>
       </div>
-      <div className="w-1/2">
+      <div className="w-1/2 relative">
         <Canvas
           shadows
           gl={{ antialias: false }}
@@ -105,6 +121,9 @@ export default function WalletIntegration() {
           style={{
             width: '100%',
             height: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
           }}
         >
           <color attach="background" args={['#f0f0f0']} />
@@ -117,13 +136,12 @@ export default function WalletIntegration() {
             shadow-mapSize={2048}
             shadow-bias={-0.0001}
           />
-          <ScrollControls damping={0.2} maxSpeed={0.5} pages={2}>
-            <Model
-              position={[0, -1, 0]}
-              rotation={[Math.PI / 2, 0, 0]}
-              scale={0.01}
-            />
-          </ScrollControls>
+          <Model
+            position={[0, -1, 0]}
+            rotation={[Math.PI / 2, 0, 0]}
+            scale={0.01}
+          />
+
           <mesh
             rotation={[-0.5 * Math.PI, 0, 0]}
             position={[0, -1.01, 0]}

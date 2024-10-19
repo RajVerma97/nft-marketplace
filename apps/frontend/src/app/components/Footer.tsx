@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
+import classNames from 'classnames';
 import {
   FaFacebook,
   FaTwitter,
@@ -19,10 +20,7 @@ const FooterLinkItem: React.FC<FooterLinkProps> = ({
   href,
   className,
 }) => (
-  <Link
-    className={` duration-100 hover:text-blue-600 hover:underline hover:text-lg ${className}`}
-    href={href}
-  >
+  <Link className={`duration-100 hover:text-blue-600 ${className}`} href={href}>
     {title}
   </Link>
 );
@@ -54,39 +52,40 @@ interface FooterLink {
 
 type SocialIcons = SocialIcon[];
 
-const Footer: React.FC = () => {
+export default function Footer() {
   const socialIcons: SocialIcons = [
     {
       title: 'Twitter',
       href: '#',
       icon: <FaTwitter className="text-2xl" />,
-      hoverColor: 'text-blue-500',
+      hoverColor: 'hover:text-blue-500',
     },
     {
       title: 'Instagram',
       href: '#',
       icon: <FaInstagram className="text-2xl" />,
-      hoverColor: 'text-pink-500',
+      hoverColor: 'hover:text-pink-500',
     },
     {
       title: 'Youtube',
       href: '#',
       icon: <FaYoutube className="text-2xl" />,
-      hoverColor: 'text-red-600',
+      hoverColor: 'hover:text-red-600',
     },
     {
       title: 'Facebook',
       href: '#',
       icon: <FaFacebook className="text-2xl" />,
-      hoverColor: 'text-blue-600',
+      hoverColor: 'hover:text-blue-600',
     },
     {
       title: 'Discord',
       href: '#',
       icon: <FaDiscord className="text-2xl" />,
-      hoverColor: 'text-indigo-500',
+      hoverColor: 'hover:text-indigo-500',
     },
   ];
+
   const links: FooterLink = {
     Explore: [
       { title: 'About', href: '#' },
@@ -95,10 +94,10 @@ const Footer: React.FC = () => {
       { title: 'NFT Stats', href: '#' },
       { title: 'Connect Wallet', href: '#' },
     ],
-    Actions: [
-      { title: 'Create NFT', href: '#' },
-      { title: 'Buy NFT', href: '#' },
-    ],
+    // Actions: [
+    //   { title: 'Create NFT', href: '#' },
+    //   { title: 'Buy NFT', href: '#' },
+    // ],
     Support: [
       { title: 'Email Us', href: 'mailto:support@example.com' },
       { title: 'Support Center', href: '/support' },
@@ -111,11 +110,11 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="p-12 bg-white text-black mt-[30rem]">
+    <footer className="p-16 bg-white text-black mt-[30rem]">
       <div className="flex justify-between">
         {Object.entries(links).map(([key, value]) => (
           <div key={key}>
-            <h2 className="text-2xl">{key}</h2>
+            <h2 className="text-3xl">{key}</h2>
             <div className="flex flex-col gap-5 mt-5">
               {value.map((link, index) => (
                 <FooterLinkItem
@@ -134,7 +133,7 @@ const Footer: React.FC = () => {
             {socialIcons.map((socialIcon, index) => (
               <SocialIcon
                 key={index}
-                className={`hover:${socialIcon.hoverColor}`}
+                className={classNames(socialIcon.hoverColor)}
               >
                 {socialIcon.icon}
               </SocialIcon>
@@ -144,6 +143,4 @@ const Footer: React.FC = () => {
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

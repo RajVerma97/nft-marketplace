@@ -12,6 +12,24 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
+  webpack: (config) => {
+    // Add a rule to handle .lottie files
+    config.module.rules.push({
+      test: /\.lottie$/,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]', // Use the original file name
+            outputPath: 'static/', // Place the files in the static folder
+            publicPath: '/_next/static/', // Make the files publicly accessible
+          },
+        },
+      ],
+    });
+
+    return config;
+  },
 };
 
 const plugins = [

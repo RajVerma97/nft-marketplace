@@ -12,6 +12,7 @@ import {
 import { useRoute, useLocation, Link } from 'wouter';
 import { easing, geometry } from 'maath';
 import { suspend } from 'suspend-react';
+import { Button } from '@my-org/ui-components';
 
 extend(geometry);
 const regular = import('@pmndrs/assets/fonts/inter_regular.woff');
@@ -19,6 +20,7 @@ const medium = import('@pmndrs/assets/fonts/inter_medium.woff');
 
 export const NFTShowcase = () => {
   const [showBackButton, setShowBackButton] = useState(false);
+  const canvasRef = useRef(); // Create a ref for the canvas
 
   const handleModelClick = () => {
     setShowBackButton(true); // Show back button when a model is clicked
@@ -28,9 +30,30 @@ export const NFTShowcase = () => {
     setShowBackButton(false); // Hide back button when navigating back
   };
 
+  // Disable scrolling on the canvas
+  useEffect(() => {
+    const handleScroll = (event) => {
+      event.preventDefault();
+    };
+
+    const canvas = canvasRef.current;
+    if (canvas) {
+      canvas.addEventListener('wheel', handleScroll, { passive: false });
+      canvas.addEventListener('touchmove', handleScroll, { passive: false });
+    }
+
+    return () => {
+      if (canvas) {
+        canvas.removeEventListener('wheel', handleScroll);
+        canvas.removeEventListener('touchmove', handleScroll);
+      }
+    };
+  }, []);
+
   return (
-    <div className="w-full min-h-screen relative border-2 border-blue-500">
+    <div className="w-full min-h-screen relative border-2 border-blue-500 overflow-hidden">
       <Canvas
+        ref={canvasRef} // Attach the ref to the Canvas component
         flat
         camera={{ fov: 75, position: [0, 0, 20] }}
         eventSource={document.getElementById('root')}
@@ -99,9 +122,18 @@ export const NFTShowcase = () => {
         <Preload all />
       </Canvas>
       {showBackButton && (
-        <div style={{ position: 'absolute', top: '20px', left: '20px' }}>
+        <div
+          style={{
+            position: 'absolute',
+            top: '10%',
+            left: '50%',
+            transform: 'translate3d(-50%, -50%, 0)',
+          }}
+        >
           <Link href="/" onClick={handleBackButtonClick}>
-            <button className="bg-blue-500 text-white p-2 rounded">Back</button>
+            <Button className="bg-white text-black px-8 rounded-lg center">
+              Back
+            </Button>
           </Link>
         </div>
       )}
@@ -205,7 +237,44 @@ function Rig({
       makeDefault
       minPolarAngle={0}
       maxPolarAngle={Math.PI / 2}
-      enableZoom={false} // Disable zooming
+      // dollySpeed={0}
     />
   );
 }
+// export const Kamera = () => {
+//   const ACTION = {
+//     NONE: 0,
+//     ROTATE: 1,
+//     TRUCK: 2,
+//     OFFSET: 4,
+//     DOLLY: 8,
+//     ZOOM: 16,
+//     TOUCH_ROTATE: 32,
+//     TOUCH_TRUCK: 64,
+//     TOUCH_OFFSET: 128,
+//     TOUCH_DOLLY: 256,
+//     TOUCH_ZOOM: 512,
+//     TOUCH_DOLLY_TRUCK: 1024,
+//     TOUCH_DOLLY_OFFSET: 2048,
+//     TOUCH_DOLLY_ROTATE: 4096,
+//     TOUCH_ZOOM_TRUCK: 8192,
+//     TOUCH_ZOOM_OFFSET: 16384,
+//     TOUCH_ZOOM_ROTATE: 32768,
+//   };
+
+//   return (
+//     <CameraControls
+//       mouseButtons={{
+//         left: ACTION.ROTATE,
+//         middle: ACTION.NONE,
+//         right: ACTION.NONE,
+//         wheel: ACTION.NONE,
+//       }}
+//       touches={{
+//         one: ACTION.TOUCH_ROTATE,
+//         two: ACTION.NONE,
+//         three: ACTION.NONE,
+//       }}
+//     />
+//   );
+// };
