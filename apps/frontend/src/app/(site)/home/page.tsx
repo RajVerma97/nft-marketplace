@@ -9,8 +9,15 @@ import RenderDinoModel from 'src/app/components/RenderDragonModel';
 import { OrbitControls } from '@react-three/drei';
 import WalletIntegration from 'src/app/components/WalletIntegration';
 import InteractiveBackground from 'src/app/components/InteractiveBackground';
+import PrismBackground from 'src/app/components/PrismBackground';
 
-export function ParallaxSectionWrappper({ children }) {
+interface ParallaxSectionWrappperProps {
+  children: React.ReactNode;
+}
+
+export function ParallaxSectionWrappper({
+  children,
+}: ParallaxSectionWrappperProps) {
   return (
     <motion.div
       className="min-h-screen"
@@ -55,6 +62,7 @@ export default function LandingPage() {
   return (
     <div className="p-16">
       <motion.div className="min-h-screen relative overflow-hidden">
+        {/* <PrismBackground /> */}
         <InteractiveBackground scrollY={scrollY} />
       </motion.div>
 
