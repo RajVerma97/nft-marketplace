@@ -88,8 +88,8 @@ export default function RenderDinoModel({ modelPath }: RenderModelProps) {
       ref={ref}
       object={scene}
       rotation={[0, -Math.PI / 6, 0]} // Keep this if you want a slight rotation
-      scale={[0.7, 0.7, 0.7]} // Adjust scale as needed
-      position={[0, 0, 0]}
+      scale={[0.6, 0.6, 0.6]} // Adjust scale as needed
+      position={[1, 1, 1]}
       onClick={handleClick} // Add click effect
     />
   );

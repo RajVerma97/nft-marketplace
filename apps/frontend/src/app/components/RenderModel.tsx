@@ -11,9 +11,6 @@ export default function RenderDinoModel({ modelPath }: RenderModelProps) {
   const { scene } = useGLTF(modelPath);
   const ref = useRef<THREE.Group | null>(null);
 
-  // Define colors for different parts
-  // Define colors for different parts
-  // Define colors for different parts
   const bodyColor = '#39ff14'; // Neon Green
   const eyeColor = '#ff3f81'; // Neon Pink
   const nailsColor = '#e1ff00'; // Neon Yellow

@@ -1,14 +1,14 @@
-import { Stars } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Button } from '@my-org/ui-components'; // Adjust the import based on your paths
+import { Button } from '@my-org/ui-components';
 import * as THREE from 'three';
 import { useMemo, useRef, useState } from 'react';
 import { useThree } from '@react-three/fiber';
 import { Float, Sphere } from '@react-three/drei';
-import { EffectComposer, Bloom, Glitch } from '@react-three/postprocessing';
 import { useSpring, a } from '@react-spring/three';
+import RenderDinoModel from './RenderDragonModel';
 
-function InteractiveScene() {
+export function InteractiveScene() {
   const { mouse } = useThree();
   const [isHovered, setIsHovered] = useState(false);
 
@@ -138,35 +138,35 @@ function EnergyRays({ isHovered }) {
 export default function HeroSection() {
   return (
     <div className="flex flex-col md:flex-row w-full h-[75vh] p-8 bg-gradient-to-r  border border-gray-700 rounded-lg shadow-2xl mt-8">
-      {/* 3D Model Section */}
-
-      <div className="w-full md:w-1/2 order-2 md:order-1 flex justify-center items-center  border-white overflow-hidden">
-        <div className="relative w-full h-full flex justify-center items-center">
-          <Canvas camera={{ position: [0, 0, 15], fov: 40 }}>
+      <div className="w-full md:w-1/2 order-2 md:order-1 flex justify-center items-center border-white overflow-hidden">
+        <div className="relative w-full h-full flex justify-center items-center   ">
+          <Canvas
+            camera={{ position: [30, 45, 50], fov: 10 }}
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+            }}
+          >
             <color attach="background" args={['black']} />
             <ambientLight intensity={0.2} />
-            <InteractiveScene />
-            <Stars saturation={0} count={600} fade speed={0.5} />
-            <EffectComposer>
-              <Bloom
-                mipmapBlur
-                intensity={1.2}
-                luminanceThreshold={0.4}
-                radius={0.8}
-              />
-              <Glitch delay={[2.5, 5]} />
-            </EffectComposer>
+            <directionalLight position={[10, 10, 5]} intensity={1} />
+            <pointLight position={[5, 5, 5]} intensity={1} />
+            <RenderDinoModel modelPath={'/dino-model/dino.glb'} />
+            <OrbitControls enablePan={false} enableZoom={false} />
           </Canvas>
         </div>
       </div>
       {/* Text and Call-to-Action Section */}
       <div className="w-full md:w-1/2 flex flex-col justify-center text-white px-10 md:px-16 py-6 md:py-0 space-y-6">
         <h1 className="text-5xl font-extrabold bg-transparent whitespace-nowrap leading-tight">
-          NFT Marketplace
+          Re-imagine NFTs
         </h1>
         <p className="mt-4 text-lg md:text-lg text-gray-300">
           “Dive into a universe of creativity with exclusive NFTs from talented
-          artists worldwide."
+          artists worldwide.”
         </p>
         <Button
           variant={'default'}

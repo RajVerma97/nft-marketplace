@@ -31,7 +31,7 @@ export default function InteractiveBackground({
       transition={{ type: 'tween', duration: 0.5 }}
     >
       <Canvas
-        camera={{ position: [40, 30, 50], fov: 12 }}
+        camera={{ position: [50, 40, 50], fov: 15 }}
         className="flex justify-center items-center"
       >
         <ambientLight intensity={0.6} />

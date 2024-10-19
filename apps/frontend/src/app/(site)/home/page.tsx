@@ -1,23 +1,24 @@
-'use client';
+'use client'; // This directive should be at the very top
+
 import { useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import HeroSection from '../../components/HeroSection';
-import NftShowcase from '../../components/NFTShowcase';
+import HeroSection, { InteractiveScene } from '../../components/HeroSection';
+import { NFTShowcase } from '../../components/NFTShowcase';
 import TestimonialsAndReviews from '../../components/TestimonialsAndReviews';
 import { Canvas } from '@react-three/fiber';
-import RenderDinoModel from 'src/app/components/RenderDragonModel';
-import { OrbitControls } from '@react-three/drei';
 import WalletIntegration from 'src/app/components/WalletIntegration';
-import InteractiveBackground from 'src/app/components/InteractiveBackground';
-import PrismBackground from 'src/app/components/PrismBackground';
+import { EffectComposer } from '@react-three/postprocessing'; // Ensure correct import
+import { Bloom, Glitch } from '@react-three/postprocessing';
 
-interface ParallaxSectionWrappperProps {
+interface ParallaxSectionWrapperProps {
   children: React.ReactNode;
+  scrollY: number; // Pass scrollY to use in this component
 }
 
 export function ParallaxSectionWrappper({
   children,
-}: ParallaxSectionWrappperProps) {
+  scrollY, // Receive scrollY prop
+}: ParallaxSectionWrapperProps) {
   return (
     <motion.div
       className="min-h-screen"
@@ -60,25 +61,63 @@ export default function LandingPage() {
   }, [scrollY, controls]);
 
   return (
-    <div className="p-16">
-      <motion.div className="min-h-screen relative overflow-hidden">
-        {/* <PrismBackground /> */}
-        <InteractiveBackground scrollY={scrollY} />
-      </motion.div>
+    <div className="p-8">
+      <motion.div className=" relative overflow-hidden h-[80vh] ">
+        <Canvas
+          camera={{ position: [0, 0, 15], fov: 42 }}
+          style={{
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+          }}
+        >
+          <ambientLight intensity={0.2} />
+          <InteractiveScene />
 
-      <ParallaxSectionWrappper>
+          <EffectComposer>
+            <Bloom
+              mipmapBlur
+              intensity={0.5}
+              luminanceThreshold={0.2}
+              radius={0.8}
+            />
+            <Glitch delay={[2.5, 5]} />
+          </EffectComposer>
+        </Canvas>
+        <motion.div
+          style={{
+            position: 'absolute',
+            top: '90%',
+            left: '50%',
+            transform: 'translate3d(-50%,-50%,0)',
+          }}
+        >
+          <h1
+            className="   "
+            style={{
+              margin: 0,
+              padding: 0,
+              fontSize: '4em',
+              fontWeight: 500,
+              letterSpacing: '-0.05em',
+            }}
+          >
+            NFT Marketplace
+          </h1>
+        </motion.div>
+      </motion.div>
+      <ParallaxSectionWrappper scrollY={scrollY}>
         <HeroSection />
       </ParallaxSectionWrappper>
-
-      <ParallaxSectionWrappper>
+      <ParallaxSectionWrappper scrollY={scrollY}>
         <WalletIntegration />
       </ParallaxSectionWrappper>
-
-      <ParallaxSectionWrappper>
-        <NftShowcase />
+      <ParallaxSectionWrappper scrollY={scrollY}>
+        <NFTShowcase />
       </ParallaxSectionWrappper>
-
-      <ParallaxSectionWrappper>
+      <ParallaxSectionWrappper scrollY={scrollY}>
         <TestimonialsAndReviews />
       </ParallaxSectionWrappper>
     </div>

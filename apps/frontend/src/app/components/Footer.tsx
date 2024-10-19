@@ -14,9 +14,13 @@ interface FooterLinkProps {
   className?: string;
 }
 
-const FooterLink: React.FC<FooterLinkProps> = ({ title, href, className }) => (
+const FooterLinkItem: React.FC<FooterLinkProps> = ({
+  title,
+  href,
+  className,
+}) => (
   <Link
-    className={`transition-all duration-100 hover:text-blue-600 hover:underline hover:text-lg ${className}`}
+    className={` duration-100 hover:text-blue-600 hover:underline hover:text-lg ${className}`}
     href={href}
   >
     {title}
@@ -84,22 +88,22 @@ const Footer: React.FC = () => {
     },
   ];
   const links: FooterLink = {
-    explore: [
+    Explore: [
       { title: 'About', href: '#' },
       { title: 'Marketplace', href: '#' },
       { title: 'NFT Collections', href: '#' },
       { title: 'NFT Stats', href: '#' },
       { title: 'Connect Wallet', href: '#' },
     ],
-    actions: [
+    Actions: [
       { title: 'Create NFT', href: '#' },
       { title: 'Buy NFT', href: '#' },
     ],
-    support: [
+    Support: [
       { title: 'Email Us', href: 'mailto:support@example.com' },
       { title: 'Support Center', href: '/support' },
     ],
-    account: [
+    Account: [
       { title: 'Login', href: '#' },
       { title: 'Privacy Policy', href: '#' },
       { title: 'Terms of Service', href: '#' },
@@ -114,7 +118,11 @@ const Footer: React.FC = () => {
             <h2 className="text-2xl">{key}</h2>
             <div className="flex flex-col gap-5 mt-5">
               {value.map((link, index) => (
-                <FooterLink key={index} title={link.title} href={link.href} />
+                <FooterLinkItem
+                  key={index}
+                  title={link.title}
+                  href={link.href}
+                />
               ))}
             </div>
           </div>

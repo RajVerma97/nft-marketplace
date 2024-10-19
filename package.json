@@ -30,6 +30,8 @@
     "@nx/vite": "19.7.2",
     "@nx/webpack": "19.7.2",
     "@nx/workspace": "19.7.2",
+    "@pmndrs/assets": "^1.7.0",
+    "@pmndrs/branding": "^0.0.8",
     "@radix-ui/react-slot": "^1.1.0",
     "@react-three/drei": "^9.114.4",
     "@react-three/fiber": "^8.17.10",
@@ -51,7 +53,8 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "tailwind-merge": "^2.5.4",
-    "three-stdlib": "^2.33.0"
+    "three-stdlib": "^2.33.0",
+    "wouter": "^3.3.5"
   },
   "devDependencies": {
     "@heroicons/react": "^2.1.5",

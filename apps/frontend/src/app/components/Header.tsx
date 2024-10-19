@@ -24,7 +24,7 @@ export default function Header() {
           asChild
           className=" bg-indigo-500 hover:bg-white hover:text-black px-8 py-2 "
         >
-          <Link href={'#'}>Login</Link>
+          <Link href={'#'}>Get Started</Link>
         </Button>
       </nav>
     </header>
