@@ -56,7 +56,7 @@ export const NFTShowcase = () => {
         ref={canvasRef} // Attach the ref to the Canvas component
         flat
         camera={{ fov: 75, position: [0, 0, 20] }}
-        eventSource={document.getElementById('root')}
+        // eventSource={document.getElementById('root')}
         eventPrefix="client"
         style={{
           width: '100%',
@@ -241,40 +241,3 @@ function Rig({
     />
   );
 }
-// export const Kamera = () => {
-//   const ACTION = {
-//     NONE: 0,
-//     ROTATE: 1,
-//     TRUCK: 2,
-//     OFFSET: 4,
-//     DOLLY: 8,
-//     ZOOM: 16,
-//     TOUCH_ROTATE: 32,
-//     TOUCH_TRUCK: 64,
-//     TOUCH_OFFSET: 128,
-//     TOUCH_DOLLY: 256,
-//     TOUCH_ZOOM: 512,
-//     TOUCH_DOLLY_TRUCK: 1024,
-//     TOUCH_DOLLY_OFFSET: 2048,
-//     TOUCH_DOLLY_ROTATE: 4096,
-//     TOUCH_ZOOM_TRUCK: 8192,
-//     TOUCH_ZOOM_OFFSET: 16384,
-//     TOUCH_ZOOM_ROTATE: 32768,
-//   };
-
-//   return (
-//     <CameraControls
-//       mouseButtons={{
-//         left: ACTION.ROTATE,
-//         middle: ACTION.NONE,
-//         right: ACTION.NONE,
-//         wheel: ACTION.NONE,
-//       }}
-//       touches={{
-//         one: ACTION.TOUCH_ROTATE,
-//         two: ACTION.NONE,
-//         three: ACTION.NONE,
-//       }}
-//     />
-//   );
-// };

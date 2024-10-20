@@ -22,7 +22,6 @@ export default function CubeBackground() {
           <ambientLight intensity={0.2} />
           <InteractiveScene />
 
-          {/* Postprocessing effects */}
           <EffectComposer>
             <Bloom
               mipmapBlur
@@ -30,7 +29,6 @@ export default function CubeBackground() {
               luminanceThreshold={0.2}
               radius={0.8}
             />
-            {/* Use THREE.Vector2 for delay */}
             <Glitch delay={new THREE.Vector2(2.5, 5)} />
           </EffectComposer>
         </Canvas>

@@ -2,30 +2,49 @@ import { Button } from '@my-org/ui-components';
 import Link from 'next/link';
 import React from 'react';
 
+interface RenderHeaderLinkProps {
+  title: string;
+  href: string;
+  className?: string;
+}
+
+const RenderHeaderLink = ({
+  title,
+  href,
+  className,
+}: RenderHeaderLinkProps) => (
+  <Button
+    asChild
+    className="hover:text-yellow-500 transition-all duration-100 transform hover:scale-110 ease-in"
+  >
+    <Link className="text-lg " href={href}>
+      {title}
+    </Link>
+  </Button>
+);
+
 export default function Header() {
   return (
-    <header className="px-10 py-6  flex items-center justify-between z-50 ">
-      <h4 className=" text-4xl  text-white ">NFT</h4>
+    <header className="p-8 z-50  ">
+      <nav
+        className="flex  justify-between items-center  px-4 py-6 "
+        style={{ border: '1px solid darkgray', borderRadius: '8px' }}
+      >
+        <h4 className=" text-5xl   ">NFT</h4>
 
-      <nav className="flex gap-4">
-        <Button asChild className="hover:text-blue-500">
-          <Link href={'/home'}>Home</Link>
-        </Button>
-        <Button asChild className="hover:text-blue-500">
-          <Link href={'#'}>Marketplace</Link>
-        </Button>
-        <Button asChild className="hover:text-blue-500">
-          <Link href={'#'}>About</Link>
-        </Button>
-        <Button asChild className="hover:text-blue-500">
-          <Link href={'#'}>Contact</Link>
-        </Button>
-        <Button
-          asChild
-          className=" bg-indigo-500 hover:bg-white hover:text-black px-8 py-2 "
-        >
-          <Link href={'#'}>Get Started</Link>
-        </Button>
+        <div className="flex gap-4 items-center">
+          <RenderHeaderLink title="Home" href="/home" />
+          <RenderHeaderLink title="Marketplace" href="/marketplace" />
+          <RenderHeaderLink title="About" href="/about" />
+          <RenderHeaderLink title="Contact" href="/contact" />
+
+          <Button
+            asChild
+            className=" bg-indigo-500 hover:bg-white hover:text-black px-6 py-3 "
+          >
+            <Link href={'#'}>Get Started</Link>
+          </Button>
+        </div>
       </nav>
     </header>
   );

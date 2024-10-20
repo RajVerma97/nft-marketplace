@@ -11,42 +11,38 @@ export default function LandingPage() {
   return (
     <div className="overflow-hidden min-h-screen">
       <motion.div className="px-16 grid gap-20">
-        {/* First section with shrinking effect */}
         <AnimatedSection
-          scrollRange={[0, 400]} // Start and end points for scrolling
-          yRange={[0, -100]} // Vertical movement
-          opacityRange={[1, 0]} // Fade out
-          scaleRange={[1, 0.95]} // Shrinks slightly
+          scrollRange={[0, 400]}
+          yRange={[0, -100]}
+          opacityRange={[1, 0]}
+          scaleRange={[1, 0.95]}
         >
           <CubeBackground />
         </AnimatedSection>
 
-        {/* Second section grows from the previous section */}
         <AnimatedSection
-          scrollRange={[300, 700]} // Trigger when scrolls into view
-          yRange={[100, 0]} // Vertical movement from below
-          opacityRange={[0, 1]} // Fade in
-          scaleRange={[0.95, 1]} // Grows back to normal
+          scrollRange={[300, 700]}
+          yRange={[100, 0]}
+          opacityRange={[0, 1]}
+          scaleRange={[0.95, 1]}
         >
           <HeroSection />
         </AnimatedSection>
 
-        {/* Third section grows from the previous section */}
         <AnimatedSection
-          scrollRange={[600, 1000]} // Trigger when scrolls into view
-          yRange={[100, 0]} // Vertical movement from below
-          opacityRange={[0, 1]} // Fade in
-          scaleRange={[0.95, 1]} // Grows back to normal
+          scrollRange={[600, 1000]}
+          yRange={[100, 0]}
+          opacityRange={[0, 1]}
+          scaleRange={[0.95, 1]}
         >
           <WalletIntegration />
         </AnimatedSection>
 
-        {/* Fourth section grows from the previous section */}
         <AnimatedSection
-          scrollRange={[900, 1300]} // Trigger when scrolls into view
-          yRange={[100, 0]} // Vertical movement from below
-          opacityRange={[0, 1]} // Fade in
-          scaleRange={[0.95, 1]} // Grows back to normal
+          scrollRange={[900, 1300]}
+          yRange={[100, 0]}
+          opacityRange={[0, 1]}
+          scaleRange={[0.95, 1]}
         >
           <NFTShowcase />
         </AnimatedSection>

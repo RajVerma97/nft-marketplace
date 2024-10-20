@@ -20,7 +20,10 @@ const FooterLinkItem: React.FC<FooterLinkProps> = ({
   href,
   className,
 }) => (
-  <Link className={`duration-100 hover:text-blue-600 ${className}`} href={href}>
+  <Link
+    className={` text-lg  hover:text-yellow-500  hover:scale-105 transition-all duration-100 ${className}`}
+    href={href}
+  >
     {title}
   </Link>
 );
@@ -57,31 +60,31 @@ export default function Footer() {
     {
       title: 'Twitter',
       href: '#',
-      icon: <FaTwitter className="text-2xl" />,
+      icon: <FaTwitter className="text-3xl" />,
       hoverColor: 'hover:text-blue-500',
     },
     {
       title: 'Instagram',
       href: '#',
-      icon: <FaInstagram className="text-2xl" />,
+      icon: <FaInstagram className="text-3xl" />,
       hoverColor: 'hover:text-pink-500',
     },
     {
       title: 'Youtube',
       href: '#',
-      icon: <FaYoutube className="text-2xl" />,
+      icon: <FaYoutube className="text-3xl" />,
       hoverColor: 'hover:text-red-600',
     },
     {
       title: 'Facebook',
       href: '#',
-      icon: <FaFacebook className="text-2xl" />,
+      icon: <FaFacebook className="text-3xl" />,
       hoverColor: 'hover:text-blue-600',
     },
     {
       title: 'Discord',
       href: '#',
-      icon: <FaDiscord className="text-2xl" />,
+      icon: <FaDiscord className="text-3xl" />,
       hoverColor: 'hover:text-indigo-500',
     },
   ];
@@ -94,10 +97,6 @@ export default function Footer() {
       { title: 'NFT Stats', href: '#' },
       { title: 'Connect Wallet', href: '#' },
     ],
-    // Actions: [
-    //   { title: 'Create NFT', href: '#' },
-    //   { title: 'Buy NFT', href: '#' },
-    // ],
     Support: [
       { title: 'Email Us', href: 'mailto:support@example.com' },
       { title: 'Support Center', href: '/support' },
@@ -114,7 +113,7 @@ export default function Footer() {
       <div className="flex justify-between">
         {Object.entries(links).map(([key, value]) => (
           <div key={key}>
-            <h2 className="text-3xl">{key}</h2>
+            <h2 className="text-3xl font-semibold ">{key}</h2>
             <div className="flex flex-col gap-5 mt-5">
               {value.map((link, index) => (
                 <FooterLinkItem
@@ -128,7 +127,7 @@ export default function Footer() {
         ))}
 
         <div>
-          <h2 className="text-2xl">Follow Us</h2>
+          <h2 className="text-3xl font-semibold">Follow Us</h2>
           <div className="flex gap-10 mt-5">
             {socialIcons.map((socialIcon, index) => (
               <SocialIcon
