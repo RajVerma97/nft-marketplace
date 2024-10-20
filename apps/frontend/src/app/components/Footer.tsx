@@ -21,7 +21,7 @@ const FooterLinkItem: React.FC<FooterLinkProps> = ({
   className,
 }) => (
   <Link
-    className={` text-lg  hover:text-yellow-500  hover:scale-105 transition-all duration-100 ${className}`}
+    className={` text-lg  hover:text-yellow-500  hover:scale-105 transition-all duration-100 ease-in ${className}`}
     href={href}
   >
     {title}
