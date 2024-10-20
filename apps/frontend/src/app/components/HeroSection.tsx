@@ -147,7 +147,7 @@ export default function HeroSection() {
 
       <div className="w-full md:w-1/2 flex flex-col justify-center text-white px-10 md:px-16 py-6 md:py-0 space-y-6">
         <h1 className="text-5xl font-extrabold bg-transparent whitespace-nowrap  leading-tight">
-          Crafting Art
+          REIMAGINE ART
         </h1>
         <p className="mt-4 text-lg md:text-lg text-gray-300">
           Explore a groundbreaking collection of NFTs that redefine creativity
