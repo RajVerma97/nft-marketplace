@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Header() {
   return (
-    <header className="px-10 py-6  flex items-center justify-between z-10 ">
+    <header className="px-10 py-6  flex items-center justify-between z-50 ">
       <h4 className=" text-4xl  text-white ">NFT</h4>
 
       <nav className="flex gap-4">

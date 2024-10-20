@@ -110,7 +110,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="p-16 bg-white text-black mt-[30rem]">
+    <footer className="p-16 bg-white text-black mt-[10rem]">
       <div className="flex justify-between">
         {Object.entries(links).map(([key, value]) => (
           <div key={key}>

@@ -8,10 +8,16 @@ import * as THREE from 'three';
 export default function CubeBackground() {
   return (
     <div>
-      <motion.div className="relative overflow-hidden h-[80vh]">
+      <motion.div className=" relative  overflow-hidden h-[100vh] w-full ">
         <Canvas
-          camera={{ position: [0, 0, 15], fov: 42 }}
-          className="absolute top-0 left-0 w-full h-full"
+          camera={{ position: [0, 0, 15], fov: 40 }}
+          style={{
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+          }}
         >
           <ambientLight intensity={0.2} />
           <InteractiveScene />
@@ -46,7 +52,7 @@ export default function CubeBackground() {
               letterSpacing: '-0.05em',
             }}
           >
-            NFT Marketplace
+            {/* NFT */}
           </h1>
         </motion.div>
       </motion.div>
