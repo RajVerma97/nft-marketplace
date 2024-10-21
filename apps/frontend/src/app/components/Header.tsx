@@ -25,12 +25,11 @@ const RenderHeaderLink = ({
 
 export default function Header() {
   return (
-    <header className="p-8 z-50  ">
-      <nav
-        className="flex  justify-between items-center  px-4 py-6 "
-        style={{ border: '1px solid darkgray', borderRadius: '8px' }}
-      >
-        <h4 className=" text-5xl   ">NFT</h4>
+    <header className="p-8 z-50">
+      <nav className="flex  justify-between items-center  px-4 py-4  border border-gray-700 rounded-lg ">
+        <Link href={'/home'} className=" text-5xl ">
+          NFT
+        </Link>
 
         <div className="flex gap-4 items-center">
           <RenderHeaderLink title="Home" href="/home" />

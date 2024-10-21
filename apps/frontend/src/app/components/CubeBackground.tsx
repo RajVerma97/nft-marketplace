@@ -1,14 +1,16 @@
 import { Canvas } from '@react-three/fiber';
 import { motion } from 'framer-motion';
 import React from 'react';
-import { InteractiveScene } from './HeroSection';
 import { EffectComposer, Bloom, Glitch } from '@react-three/postprocessing';
 import * as THREE from 'three';
+import InteractiveScene from './InteractiveScene';
+import scrollDownAnimation from '../../../public/scroll-down-animation.json';
+import LottieAnimation from './LottieAnimation';
 
 export default function CubeBackground() {
   return (
     <div>
-      <motion.div className=" relative  overflow-hidden h-[100vh] w-full ">
+      <motion.div className=" relative  overflow-hidden h-[80vh] w-full ">
         <Canvas
           camera={{ position: [0, 0, 15], fov: 40 }}
           style={{
@@ -36,22 +38,14 @@ export default function CubeBackground() {
         <motion.div
           style={{
             position: 'absolute',
-            top: '85%',
+            top: '86%',
             left: '50%',
             transform: 'translate3d(-50%, -50%, 0)',
+            width: '6rem',
+            height: '6rem',
           }}
         >
-          <h1
-            style={{
-              margin: 0,
-              padding: 0,
-              fontSize: '4em',
-              fontWeight: 500,
-              letterSpacing: '-0.05em',
-            }}
-          >
-            {/* NFT */}
-          </h1>
+          <LottieAnimation animationData={scrollDownAnimation} />
         </motion.div>
       </motion.div>
     </div>

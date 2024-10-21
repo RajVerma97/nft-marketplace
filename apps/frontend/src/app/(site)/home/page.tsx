@@ -12,37 +12,37 @@ export default function LandingPage() {
     <div className="overflow-hidden min-h-screen">
       <motion.div className="px-16 grid gap-20">
         <AnimatedSection
-          scrollRange={[0, 400]}
-          yRange={[0, -100]}
+          scrollRange={[0, 500]}
+          yRange={[0, -150]}
           opacityRange={[1, 0]}
-          scaleRange={[1, 0.95]}
+          scaleRange={[1, 0.9]}
         >
           <CubeBackground />
         </AnimatedSection>
 
         <AnimatedSection
-          scrollRange={[300, 700]}
-          yRange={[100, 0]}
+          scrollRange={[400, 900]}
+          yRange={[150, 0]}
           opacityRange={[0, 1]}
-          scaleRange={[0.95, 1]}
+          scaleRange={[0.9, 1]}
         >
           <HeroSection />
         </AnimatedSection>
 
         <AnimatedSection
-          scrollRange={[600, 1000]}
+          scrollRange={[800, 1300]}
           yRange={[100, 0]}
           opacityRange={[0, 1]}
-          scaleRange={[0.95, 1]}
+          scaleRange={[1, 1]}
         >
           <WalletIntegration />
         </AnimatedSection>
 
         <AnimatedSection
-          scrollRange={[900, 1300]}
+          scrollRange={[1200, 1600]}
           yRange={[100, 0]}
           opacityRange={[0, 1]}
-          scaleRange={[0.95, 1]}
+          scaleRange={[1, 1]}
         >
           <NFTShowcase />
         </AnimatedSection>

@@ -1,13 +1,9 @@
-import {
-  ScrollControls,
-  SoftShadows,
-  useAnimations,
-  useGLTF,
-} from '@react-three/drei';
+import { SoftShadows } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { EffectComposer, TiltShift2 } from '@react-three/postprocessing';
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import Image from 'next/image';
+import RenderWalletIntegrationModel from './RenderWalletIntegrationModel';
 
 const RenderWalletIcons = () => {
   const wallets = [
@@ -44,62 +40,10 @@ const RenderWalletIcons = () => {
   );
 };
 
-function Model(props) {
-  const { nodes, materials, animations } = useGLTF('/jump-transformed.glb');
-  const { ref, actions } = useAnimations(animations);
-  const isInView = useRef(false);
-  const scrollY = useRef(0);
-
-  useEffect(() => {
-    actions.jump.reset().play();
-    actions.jump.paused = true;
-  }, [actions]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      scrollY.current = window.scrollY;
-      const scrollPercentage =
-        scrollY.current / (document.body.scrollHeight - window.innerHeight); // Calculate scroll percentage
-
-      if (scrollPercentage > 0.2 && !isInView.current) {
-        actions.jump.paused = false;
-        isInView.current = true;
-      } else if (scrollPercentage <= 0.2 && isInView.current) {
-        actions.jump.paused = true;
-        isInView.current = false;
-      }
-
-      if (isInView.current) {
-        actions.jump.time = actions.jump.getClip().duration * scrollPercentage; // Update time based on scroll percentage
-      }
-    };
-
-    // Add scroll event listener
-    window.addEventListener('scroll', handleScroll);
-
-    // Cleanup listener on unmount
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [actions]);
-  return (
-    <group {...props} ref={ref}>
-      <primitive object={nodes.mixamorigHips} />
-      <skinnedMesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Ch03.geometry}
-        material={materials.Ch03_Body}
-        skeleton={nodes.Ch03.skeleton}
-      />
-    </group>
-  );
-}
-
 export default function WalletIntegration() {
   return (
-    <div className=" flex w-full   h-[90vh]">
-      <div className="flex justify-center items-center w-1/2    border-2">
+    <div className=" flex w-full   h-[90vh] ">
+      <div className="flex justify-center items-center w-1/2 rounded-md border border-gray-700">
         <div className="p-12">
           <h1 className="text-6xl font-bold text-white text-nowrap">
             Wallet Integration
@@ -124,6 +68,7 @@ export default function WalletIntegration() {
             position: 'absolute',
             top: 0,
             left: 0,
+            borderRadius: '8px',
           }}
         >
           <color attach="background" args={['#f0f0f0']} />
@@ -136,7 +81,7 @@ export default function WalletIntegration() {
             shadow-mapSize={2048}
             shadow-bias={-0.0001}
           />
-          <Model
+          <RenderWalletIntegrationModel
             position={[0, -1, 0]}
             rotation={[Math.PI / 2, 0, 0]}
             scale={0.01}
@@ -151,7 +96,7 @@ export default function WalletIntegration() {
             <meshStandardMaterial transparent opacity={0.75} />
           </mesh>
           <SoftShadows size={40} samples={16} />
-          <EffectComposer disableNormalPass multisampling={4}>
+          <EffectComposer multisampling={4}>
             <TiltShift2 blur={1} />
           </EffectComposer>
         </Canvas>
