@@ -10,7 +10,6 @@ import { useLocation, useRoute } from 'wouter';
 import * as THREE from 'three';
 import { Euler, Vector3 } from 'three';
 import { easing, geometry } from 'maath';
-import { FontLoader } from 'three-stdlib';
 
 interface FrameProps {
   children: React.ReactNode;
@@ -41,15 +40,6 @@ export default function Frame({
   const width = 1;
   const height = 1.61803398875;
 
-  const [fontUrl, setFontUrl] = useState<string>('');
-
-  useEffect(() => {
-    const fontLoader = new FontLoader();
-    fontLoader.load('@pmndrs/assets/fonts/inter_medium.woff', (loadedFont) => {
-      setFontUrl('@pmndrs/assets/fonts/inter_medium.woff');
-    });
-  }, []);
-
   useCursor(hovered);
   useFrame((state, dt) => {
     const currentPortal = portal.current;
@@ -62,7 +52,6 @@ export default function Frame({
       {
         <>
           <Text
-            font={fontUrl}
             fontSize={0.3}
             anchorY="top"
             anchorX="left"
@@ -73,7 +62,6 @@ export default function Frame({
             {name}
           </Text>
           <Text
-            font={fontUrl}
             fontSize={0.1}
             anchorX="right"
             position={[0.4, -0.659, 0.01]}
@@ -82,7 +70,6 @@ export default function Frame({
             /{id}
           </Text>
           <Text
-            font={fontUrl}
             fontSize={0.04}
             anchorX="right"
             position={[0.0, -0.677, 0.01]}
@@ -102,7 +89,7 @@ export default function Frame({
         onPointerOver={(e) => hover(true)}
         onPointerOut={() => hover(false)}
       >
-        {/*@ts-expect-error hd */}
+        {/*@ts-expect-error  */}
         <roundedPlaneGeometry args={[width, height, 0.1]} />
         <MeshPortalMaterial
           ref={portal}

@@ -6,20 +6,12 @@ import { Button } from '@my-org/ui-components';
 import Frame from './Frame';
 import Rig from './Rig';
 import { Euler, Vector3 } from 'three';
-import { FontLoader } from 'three-stdlib';
 
 export const NFTShowcase = () => {
   const [showBackButton, setShowBackButton] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  const [fontUrl, setFontUrl] = useState<string>('');
 
-  useEffect(() => {
-    const fontLoader = new FontLoader();
-    fontLoader.load('@pmndrs/assets/fonts/inter_medium.woff', (loadedFont) => {
-      setFontUrl('@pmndrs/assets/fonts/inter_medium.woff');
-    });
-  }, []);
 
   const handleModelClick = () => {
     setShowBackButton(true);
@@ -67,7 +59,6 @@ export const NFTShowcase = () => {
         <color attach="background" args={['#fff']} />
 
         <Text
-          font={fontUrl}
           fontSize={0.8}
           position={[0, 2, 1]}
           anchorX="center"
