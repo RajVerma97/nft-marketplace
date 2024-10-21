@@ -21,7 +21,7 @@ const FooterLinkItem: React.FC<FooterLinkProps> = ({
   className,
 }) => (
   <Link
-    className={` text-lg  hover:text-yellow-500  hover:scale-105 transition-all duration-100 ease-in ${className}`}
+    className={` text-lg   hover:text-yellow-500  hover:scale-105 transition-all duration-100 ease-in ${className}`}
     href={href}
   >
     {title}
@@ -35,7 +35,7 @@ interface SocialIconProps {
 
 const SocialIcon: React.FC<SocialIconProps> = ({ children, className }) => (
   <Link
-    className={`transition-transform duration-300 transform hover:scale-150 text-gray-800 ${className}`}
+    className={`transition-transform text-center duration-300 transform hover:scale-150 text-gray-800 ${className}`}
     href="#"
   >
     {children}
@@ -109,11 +109,11 @@ export default function Footer() {
   };
 
   return (
-    <footer className="p-16 bg-white text-black mt-[10rem]">
-      <div className="flex justify-between">
+    <footer className="p-16 bg-white text-black mt-[10rem] flex justify-center ">
+      <div className="flex flex-col md:flex-row  justify-between sm:gap-4 ">
         {Object.entries(links).map(([key, value]) => (
           <div key={key}>
-            <h2 className="text-3xl font-semibold ">{key}</h2>
+            <h2 className="text-3xl font-semibold mt-5 ">{key}</h2>
             <div className="flex flex-col gap-5 mt-5">
               {value.map((link, index) => (
                 <FooterLinkItem
@@ -127,8 +127,8 @@ export default function Footer() {
         ))}
 
         <div>
-          <h2 className="text-3xl font-semibold">Follow Us</h2>
-          <div className="flex gap-10 mt-5">
+          {/* <h2 className="text-3xl mt-4 font-semibold">Follow Us</h2> */}
+          <div className="flex gap-10 mt-5  ">
             {socialIcons.map((socialIcon, index) => (
               <SocialIcon
                 key={index}

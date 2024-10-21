@@ -11,8 +11,6 @@ export const NFTShowcase = () => {
   const [showBackButton, setShowBackButton] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-
-
   const handleModelClick = () => {
     setShowBackButton(true);
   };
@@ -41,7 +39,7 @@ export const NFTShowcase = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen relative overflow-hidden ">
+    <div className="w-full h-[60vh] md:h-[60vh] lg:h-[80vh] relative overflow-hidden ">
       <Canvas
         ref={canvasRef}
         flat

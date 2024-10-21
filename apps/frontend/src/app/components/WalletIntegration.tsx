@@ -20,8 +20,9 @@ const RenderWalletIcons = () => {
       image: '/trust-wallet.svg',
     },
   ];
+
   return (
-    <div className="w-full flex justify-between ">
+    <div className="w-full flex justify-between">
       {wallets.map((wallet, index) => (
         <div
           key={index}
@@ -31,8 +32,8 @@ const RenderWalletIcons = () => {
             src={wallet.image}
             width={200}
             height={200}
-            alt="Metamask"
-            className=" object-cover w-full h-full"
+            alt={wallet.name} // Update alt to reflect the wallet name
+            className="object-cover w-full h-full"
           />
         </div>
       ))}
@@ -42,22 +43,8 @@ const RenderWalletIcons = () => {
 
 export default function WalletIntegration() {
   return (
-    <div className=" flex w-full   h-[90vh] ">
-      <div className="flex justify-center items-center w-1/2 rounded-md border border-gray-700">
-        <div className="p-12">
-          <h1 className="text-6xl font-bold text-white text-nowrap">
-            Wallet Integration
-          </h1>
-          <p className="mt-4  text-gray-200 text-xl">
-            Seamlessly connect your digital wallet to our NFT Marketplace for a
-            smooth and secure trading experience.
-          </p>
-          <div className="mt-8 flex space-x-4 justify-between ">
-            <RenderWalletIcons />
-          </div>
-        </div>
-      </div>
-      <div className="w-1/2 relative">
+    <div className="flex flex-col lg:flex-row w-full lg:h-[80vh]">
+      <div className="h-[80vh] lg:h-full order-1 lg:order-2 w-full lg:w-1/2 flex relative">
         <Canvas
           shadows
           gl={{ antialias: false }}
@@ -100,6 +87,21 @@ export default function WalletIntegration() {
             <TiltShift2 blur={1} />
           </EffectComposer>
         </Canvas>
+      </div>
+
+      <div className="w-full lg:w-1/2 flex justify-center items-center rounded-md border border-gray-700 order-2 lg:order-1">
+        <div className=" p-16 md:p-16">
+          <h1 className="text-5xl font-bold text-white text-nowrap">
+            Wallet Integration
+          </h1>
+          <p className="mt-6 text-gray-200 text-lg">
+            Seamlessly connect your digital wallet to our NFT Marketplace for a
+            smooth and secure trading experience.
+          </p>
+          <div className="mt-6 flex justify-between">
+            <RenderWalletIcons />
+          </div>
+        </div>
       </div>
     </div>
   );

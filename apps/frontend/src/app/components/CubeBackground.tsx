@@ -10,7 +10,7 @@ import LottieAnimation from './LottieAnimation';
 export default function CubeBackground() {
   return (
     <div>
-      <motion.div className=" relative  overflow-hidden h-[80vh] w-full ">
+      <motion.div className=" relative  overflow-hidden  h-[110vh] md:h-[80vh]  w-full ">
         <Canvas
           camera={{ position: [0, 0, 15], fov: 40 }}
           style={{

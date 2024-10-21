@@ -24,6 +24,7 @@ body {
   color: white;
   font-family: 'Montserrat', sans-serif;
   margin: 0;
+  position: absolute;
 }
 h1,
 h2,
